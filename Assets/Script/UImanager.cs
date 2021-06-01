@@ -8,8 +8,6 @@ public class UImanager : MonoBehaviour
     public Text scoretext;
     public Text highscoretext;
 
-    public AudioSource highscorebeat;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -26,10 +24,6 @@ public class UImanager : MonoBehaviour
         {
             PlayerPrefs.SetInt("HighScore", PlayerPrefs.GetInt("Score"));
             highscoretext.text = "HighScore : " + PlayerPrefs.GetInt("HighScore").ToString();
-            if (!highscorebeat.isPlaying)
-            {
-                highscorebeat.Play();
-            }
         }
     }
 }
