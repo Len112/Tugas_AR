@@ -15,6 +15,7 @@ public class PlayManager : MonoBehaviour
     public AudioSource happys;
     public AudioSource dies;
     public AudioSource scared;
+    public AudioSource Lose;
 
     bool die;
     bool happy;
@@ -32,13 +33,15 @@ public class PlayManager : MonoBehaviour
     {
         anim.SetBool("scared",true);
         anim.SetBool("Happy", false);
-        if (GameObject.FindGameObjectsWithTag("Spider").Length > 0 && !scared.isPlaying && GameObject.FindGameObjectsWithTag("Spider").Length <= 20)
+        GameObject[] gos = GameObject.FindGameObjectsWithTag("Spider");
+        if (gos.Length > 0 && !scared.isPlaying && gos.Length <= 20)
         {
             happy = false;
             happys.Stop();
             scared.Play();
+            anim.SetBool("Happy", false);
         }
-        if (GameObject.FindGameObjectsWithTag("Spider").Length > 20 &&  !dies.isPlaying && !die)
+        if (gos.Length > 20 &&  !dies.isPlaying && !die)
         {
             dies.Play();
             Debug.Log("DIE");
@@ -48,14 +51,15 @@ public class PlayManager : MonoBehaviour
             happys.Stop();
             scared.Stop();
             die = true;
+            anim.SetBool("Happy", false);
         }
-        if (GameObject.FindGameObjectsWithTag("Spider").Length == 0 && !happys.isPlaying && !happy)
+        if (gos.Length == 0 && !happys.isPlaying && !happy)
         {
             anim.SetBool("scared", false);
             anim.SetBool("Happy", true);
             happys.Play();
             scared.Stop();
-            die = true;
+            happy = true;
         }
     }
 
@@ -65,6 +69,7 @@ public class PlayManager : MonoBehaviour
         Time.timeScale = 0;
         youlose.text = "YOU LOSE !";
         dies.Stop();
+        Lose.Play();
         GameObject[] gos = GameObject.FindGameObjectsWithTag("Spider");
 
         foreach (GameObject go in gos)

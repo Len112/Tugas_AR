@@ -28,13 +28,16 @@ public class NewHandler : MonoBehaviour, ITrackableEventHandler
 
     #region UNITY_MONOBEHAVIOUR_METHODS
 
-    public GameObject Objectspawn1;
-    public GameObject Objectspawn2;
+    
     public AudioSource happy;
     public AudioSource die;
     public AudioSource scared;
+    public AudioSource backsound;
+
     public GameObject canvasscan;
     public GameObject canvasplay;
+    public GameObject Objectspawn1;
+    public GameObject Objectspawn2;
 
     public PlayManager playermanager;
 
@@ -117,11 +120,10 @@ public class NewHandler : MonoBehaviour, ITrackableEventHandler
             Objectspawn2.SetActive(true);
             canvasplay.SetActive(true);
             canvasscan.SetActive(false);
-            /*if (GameObject.FindGameObjectsWithTag("Spider").Length > 0 && GameObject.FindGameObjectsWithTag("Spider").Length <= 20)
-            {
-                scared.Play();
-            }*/
+            
             playermanager.enabled = true;
+
+            backsound.Stop();
            
         }
     }
@@ -159,6 +161,8 @@ public class NewHandler : MonoBehaviour, ITrackableEventHandler
             die.Pause();
             happy.Pause();
             playermanager.enabled = false;
+
+            backsound.Play();
         }
     }
 

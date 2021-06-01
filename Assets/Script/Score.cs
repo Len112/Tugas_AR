@@ -33,7 +33,7 @@ public class Score : MonoBehaviour
         GameObject go = Instantiate(blood, transform.position, Quaternion.identity);
         go.transform.parent = GameObject.Find("ImageTarget").transform;
 
-        PlayerPrefs.SetInt("Score", score+10);
+        PlayerPrefs.SetInt("Score", score+1);
         Debug.Log(PlayerPrefs.GetInt("Score"));
 
         splash.Play();
